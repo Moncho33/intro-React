@@ -1,0 +1,42 @@
+import React, { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import Contenedor from './OtroComponete'
+
+function App() {
+  let productos = [
+    {nombre : "coca cola", presentacio: "2lt", precio : 5000, urlImg: "data:image/jpeg;base64,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"},
+    {nombre : "doritos", presentacio: "pac", precio : 3000, urlImg: ""},
+    {nombre : "gudiz", presentacio: "pac", precio : 2000, urlImg:""},
+
+  ]
+
+  let nombre="Juan"
+
+  return (
+    <>
+    <h1> Nuestro producto</h1>
+    <div className='contenedor_producto'>
+    productos.map((pro)=>{
+      <Contenedor 
+      nombre=  {pro.productos}
+      present=  {pro.presentacio}
+      precio=  {pro.precio}
+      nombre=  {pro.urlImg}
+      
+      />
+    })
+
+    </div>
+
+    </>
+  )
+}
+
+export function Nombre (){
+  return <p> mi componete 
+    <span></span>
+  </p>
+}
+export default App
